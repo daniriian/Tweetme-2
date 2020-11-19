@@ -13,3 +13,4 @@ python_version = "3.8"
 [dev-packages]
 pylint = "*"
 GitPython = "*"
+autopep8 = "*"
