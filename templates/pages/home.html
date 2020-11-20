@@ -30,10 +30,11 @@ this is amazing!!!!
 </div>
 
 <script>
-    
+
     const responseType = "json"
 
     handleTweetCreateFormDidSubmit = function (event) {
+
         event.preventDefault()
         const myForm = event.target
         const myFormData = new FormData(myForm)
@@ -41,27 +42,29 @@ this is amazing!!!!
         const method = myForm.getAttribute('method')
 
         const xhr = new XMLHttpRequest()
+
         xhr.responseType = responseType
         xhr.open(method, url)
         xhr.setRequestHeader("HTTP_X_REQUEST_WITH", "XMLHttpRequest")
         xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
         xhr.onload = function () {
-            if(xhr.status === 201) {
+            if (xhr.status === 201) {
                 const newTweetJson = xhr.response
                 const newTweetElement = formatTweetElement(newTweetJson)
                 const ogHtml = tweetsContainerElement.innerHTML
                 tweetsContainerElement.innerHTML = newTweetElement + ogHtml
                 myForm.reset()
             }
-            else if(xhr.status == 400) {
+            else if (xhr.status === 400) {
                 const err = xhr.response
                 console.log(err)
             }
-            else if (hxr.status == 500) {
-                alert('There was a server error,, please try again later ...')
+            else if (xhr.status === 401) {
+                alert('You must login !')
+                window.location.href = '/login'
             }
         }
-        xhr.onerror = function() {
+        xhr.onerror = function () {
             alert('An error occured. Please try again later...')
         }
         xhr.send(myFormData)
