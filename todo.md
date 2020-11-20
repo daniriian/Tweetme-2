@@ -25,3 +25,5 @@ Long term todos
 - Notifications
 - DM
 - Explore -> finding hashtags
+
+3:16:09
